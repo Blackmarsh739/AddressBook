@@ -9,30 +9,6 @@ interface Command {
     fun execute(): Any
 }
 
-fun AddContactCreateRequest.toContact() =
-    Contact(
-        id = UUID.randomUUID(),
-        firstName = this@toContact.firstName,
-        lastName = this@toContact.lastName,
-        emails = this@toContact.emails,
-        phoneNumber = this@toContact.phoneNumber,
-        address = this@toContact.address,
-        groups = this@toContact.groups
-
-    )
-
-fun UpdateContactRequest.toContact() =
-    Contact(
-        id = UUID.randomUUID(),
-        firstName = this@toContact.firstName,
-        lastName = this@toContact.lastName,
-        emails = this@toContact.emails,
-        phoneNumber = this@toContact.phoneNumber,
-        address = this@toContact.address,
-        groups = this@toContact.groups
-
-    )
-
 class AddContactCommand(
     private val request: AddContactCreateRequest
 ) : Command {

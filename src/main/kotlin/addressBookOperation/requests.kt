@@ -23,6 +23,30 @@ data class UpdateContactRequest(
     val address: MutableMap<String, String>,
     val groups: MutableList<String>
 )
+
+fun AddContactCreateRequest.toContact() =
+    Contact(
+        id = UUID.randomUUID(),
+        firstName = this@toContact.firstName,
+        lastName = this@toContact.lastName,
+        emails = this@toContact.emails,
+        phoneNumber = this@toContact.phoneNumber,
+        address = this@toContact.address,
+        groups = this@toContact.groups
+
+    )
+
+fun UpdateContactRequest.toContact() =
+    Contact(
+        id = UUID.randomUUID(),
+        firstName = this@toContact.firstName,
+        lastName = this@toContact.lastName,
+        emails = this@toContact.emails,
+        phoneNumber = this@toContact.phoneNumber,
+        address = this@toContact.address,
+        groups = this@toContact.groups
+
+    )
 data class AddGroupRequest(
     val groupName: String,
     val groupMember: MutableList<Contact>

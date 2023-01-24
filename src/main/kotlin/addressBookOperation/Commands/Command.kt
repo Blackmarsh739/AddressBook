@@ -1,8 +1,9 @@
-package addressBookOperation
+package addressBookOperation.Commands
 
 import Contact
 import Group
-import java.lang.reflect.Member
+import addressBookOperation.Storage.Storage
+import addressBookOperation.request.*
 import java.util.*
 
 interface Command {
@@ -18,7 +19,7 @@ class AddContactCommand(
 }
 class DeleteContactCommand(
     private val request: UUID
-): Command{
+): Command {
     override fun execute(): Contact {
         return Storage.removeContact(request)!!
     }
@@ -26,7 +27,7 @@ class DeleteContactCommand(
 
 class UpdateContactCommand(
     private val request: UpdateContactRequest
-) : Command{
+) : Command {
     override fun execute(): Any {
         return Storage.updateContact(request)
     }
@@ -34,7 +35,7 @@ class UpdateContactCommand(
 
 class SearchContactCommand(
     private val query: String
-): Command{
+): Command {
     override fun execute(): List<Contact> {
         return Storage.searchContacts(query)
     }
@@ -46,8 +47,33 @@ class AddGroupCommand(
     override fun execute(): Group = Storage.addGroup(request.toGroups())
 
 }
-class ShowGroupsCommand: Command{
+class ShowGroupsCommand: Command {
     override fun execute(): Collection<Group> {
        return Storage.showGroups()
     }
 }
+class UpdateGroupCommand(
+    private val request: UpdateGroupRequest
+): Command {
+    override fun execute(): Any {
+        return Storage.updateGroup(request)
+    }
+
+}class DeleteGroupContact(
+    private val request: UUID
+): Command {
+    override fun execute(): Any {
+        return Storage.removeGroup(request)!!
+    }
+
+}
+class SearchGroupCommand(
+    private val query: String
+): Command {
+    override fun execute(): List<Group> {
+        return Storage.searchGroups(query)
+    }
+
+}
+
+

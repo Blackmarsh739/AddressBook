@@ -1,4 +1,4 @@
-package addressBookOperation
+package addressBookOperation.request
 
 import Contact
 import Group
@@ -55,4 +55,15 @@ fun AddGroupRequest.toGroups() = Group(
     Gid = UUID.randomUUID(),
     groupName = this@toGroups.groupName,
     groupInfo = this@toGroups.groupMember
+)
+
+data class UpdateGroupRequest(
+    val groupId: UUID,
+    val groupName:String,
+    val groupMember: MutableList<Contact>
+)
+fun UpdateGroupRequest.toGroup() = Group(
+    Gid = this@toGroup.groupId,
+    groupName = this@toGroup.groupName,
+    groupInfo = this@toGroup.groupMember
 )
